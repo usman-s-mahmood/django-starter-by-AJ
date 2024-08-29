@@ -9,6 +9,4 @@ def user_postsave(sender, instance, created, **kwargs):
     
     # add profile if user is created
     if created:
-        Profile.objects.create(
-            user = user,
-        )
+        Profile.objects.create(user=user)
