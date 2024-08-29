@@ -26,3 +26,11 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.user)
+    
+    @property
+    def name(self):
+        if self.displayname:
+            name = self.displayname
+        else:
+            name = self.user.username
+        return name
