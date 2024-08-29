@@ -34,3 +34,11 @@ class Profile(models.Model):
         else:
             name = self.user.username
         return name
+    
+    @property
+    def avatar(self):
+        try:
+            avatar = self.image.url
+        except:
+            avatar = static('images/avatar.svg')
+        return avatar
