@@ -5,7 +5,17 @@ from django.urls import reverse
 
 # Create your views here.
 
-def profile_view(request):
+def profile_view(request, username=None):
+    if username:
+        profile = get_object_or_404(
+            User,
+            username=username
+        ).profile
+    else:
+        try:
+            profile = request.user.profile
+        except:
+            return redirect('account_login')
     profile = request.user.profile
     return render(
         request,
@@ -36,5 +46,15 @@ def profile_edit_view(request):
         {
             'form': form,
             'onboarding': onboarding 
+        }
+    )
+    
+@login_required
+def profile_settings_view(request):
+    return render(
+        request,
+        'a_users/profile_settings.html',
+        {
+            
         }
     )
